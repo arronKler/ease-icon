@@ -1,0 +1,12 @@
+{
+  "name": "@ease-icon/vue",
+  "version": "1.0.0",
+  "main": "./dist/icons.umd.min.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "vue build src/index.js --target lib --name icons --dest dist"
+  },
+  "dependencies": {
+    "eslint-plugin-vue": "^7.4.1"
+  }
+}

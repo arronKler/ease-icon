@@ -1,0 +1,10 @@
+{
+  "name": "ease-icon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {},
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
