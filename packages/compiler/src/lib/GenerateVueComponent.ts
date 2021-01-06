@@ -9,6 +9,14 @@ const VueTemplate = `export default {
       type: String,
       default: '42',
     },
+    colors: {
+      type: Array,
+      default: () => ['#333'],
+    },
+    mode: {
+      type: String,
+      defualt: 'single',
+    },
   },
   name: '$name$',
   render() {

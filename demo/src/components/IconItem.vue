@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="icon-wrapper">
-      <component :is="'I' + name" :size="size"></component>
+      <component :is="'I' + name" :size="size" :colors="colors"></component>
     </div>
     <div class="infos">
       <div class="name">{{ name }}</div>
@@ -15,6 +15,7 @@ export default {
   props: {
     name: String,
     size: String,
+    colors: Array,
   },
 };
 </script>

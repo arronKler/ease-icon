@@ -7,6 +7,10 @@ export interface SVGPathElementAttribute {
   [x: string]: string
 }
 
+export interface SVGPathModel {
+  '$': SVGPathElementAttribute
+}
+
 export interface SVGElementAttribute {
   width: string;
   height: string;
@@ -17,7 +21,7 @@ export interface SVGElementAttribute {
 export interface SVGObjectModel {
   '$': SVGElementAttribute
   rect: SVGRectElementAttribute[]
-  path: SVGPathElementAttribute[]
+  path: SVGPathModel[]
 }
 
 export interface SVGModel {

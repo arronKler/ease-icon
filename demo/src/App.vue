@@ -7,10 +7,11 @@
         :key="comp.name"
         :name="comp.name"
         :size="size"
+        :colors="colors"
       ></IconItem>
     </main>
     <aside class="operation">
-      <OperatePanel @size="onSizeChange"></OperatePanel>
+      <OperatePanel @size="onSizeChange" @colors="onColors"></OperatePanel>
     </aside>
   </div>
 </template>
@@ -28,11 +29,16 @@ export default {
   data() {
     return {
       size: '40',
+      colors: ['#333', '', '', ''],
     };
   },
   methods: {
     onSizeChange(size) {
       this.size = size;
+    },
+
+    onColors(colors) {
+      this.colors = colors;
     },
   },
 };
