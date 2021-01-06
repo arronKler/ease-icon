@@ -25,7 +25,7 @@ async function run() {
 run();
 
 async function resolveSvgFiles(svgFiles, iconFolderPath, dirname) {
-  svgFiles.forEach(async (svgFileName) => {
+  for (let svgFileName of svgFiles) {
     const filename = svgFileName.replace(/\.svg$/, '');
     const svgRealPath = path.resolve(iconFolderPath, svgFileName);
 
@@ -41,5 +41,5 @@ async function resolveSvgFiles(svgFiles, iconFolderPath, dirname) {
     );
 
     SVG_MAP.set(filename, path.join(dirname, filename));
-  });
+  }
 }

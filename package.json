@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "bootstrap": "lerna bootstrap && yarn run build:compiler && yarn build",
+    "build:compiler": "bash setup.sh",
+    "build": "node build/build-icons.js && bash build.sh",
+    "start": "cd demo && yarn serve"
+  },
   "devDependencies": {
     "lerna": "^3.22.1"
   }
