@@ -1,6 +1,3 @@
-
-<script>
-/* eslint-disable */
 export default {
   props: {
     size: {
@@ -9,7 +6,7 @@ export default {
     },
   },
   name: 'Exit',
-  render(h) {
+  render() {
     return (<svg width={this.size} height={this.size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="48" height="48" fill="white" fill-opacity="0.01"/>
   <path d="M23.9917 6L6 6L6 42H24" stroke="#333" stroke-width="3" stroke-linecap="square" stroke-linejoin="bevel"/>
@@ -18,4 +15,4 @@ export default {
 </svg>)
   },
 };
-</script>
+

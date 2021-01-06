@@ -33,7 +33,6 @@ async function resolveSvgFiles(svgFiles, iconFolderPath, dirname) {
 
     const output = await compiler.SvgCompiler(data);
 
-    console.log(output);
     compiler.GenerateVueComponent(
       path.resolve(VUE_PACKAGE_PATH, 'src/icons', dirname, svgFileName),
       output,

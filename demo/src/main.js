@@ -1,17 +1,27 @@
 import Vue from 'vue';
 import App from './App.vue';
-import EaseIcons from '@ease-icon/vue';
+import * as Icons from '@ease-icon/vue';
+import Element from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false;
-/* console.log(Exit.name);
+
+const icons = { ...Icons };
+
+delete icons.default;
+
 Vue.use({
   install(Vue) {
-    Vue.component('I' + Exit.name, Exit);
-    Vue.component('I' + OffScreen.name, OffScreen);
+    for (let key of Object.keys(icons)) {
+      const comp = icons[key];
+      Vue.component('I' + comp.name, comp);
+    }
   },
-}); */
+});
 
-Vue.use(EaseIcons);
+Vue.prototype.icons = icons;
+
+Vue.use(Element);
 
 const vm = new Vue({
   render: h => h(App),
