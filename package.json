@@ -4,9 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap && yarn run build:compiler && yarn build:icons",
-    "build:compiler": "bash setup.sh",
-    "build:icons": "node build/build-icons.js && bash build.sh",
+    "build": "node build/build",
     "start": "cd demo && yarn serve"
   },
   "devDependencies": {

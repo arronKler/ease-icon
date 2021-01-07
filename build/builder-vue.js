@@ -136,16 +136,15 @@ exports.buildVuePackage = function (category) {
 };
 
 exports.copyEssentialFiles = function (category) {
-  console.log('copy eslint');
-  helper.copyFile(
-    path.resolve(__dirname, '../.eslintrc.js'),
-    path.resolve(VUE_PACKAGE_PATH, category, '.eslintrc.js'),
-    true,
-  );
-
-  console.log('copy package json');
-
   try {
+    // copy eslintrc.js file in root directory
+    helper.copyFile(
+      path.resolve(__dirname, '../.eslintrc.js'),
+      path.resolve(VUE_PACKAGE_PATH, category, '.eslintrc.js'),
+      true,
+    );
+
+    // copy package.json file and inject package infos
     helper.copyWithInject(
       path.resolve(VUE_PACKAGE_PATH, 'template.package.json'),
 

@@ -8,16 +8,8 @@ Vue.config.productionTip = false;
 
 const icons = { ...Icons };
 
+Vue.use(Icons.default);
 delete icons.default;
-
-Vue.use({
-  install(Vue) {
-    for (let key of Object.keys(icons)) {
-      const comp = icons[key];
-      Vue.component('I' + comp.name, comp);
-    }
-  },
-});
 
 Vue.prototype.icons = icons;
 

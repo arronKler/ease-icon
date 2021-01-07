@@ -78,6 +78,7 @@ function resolveSvgFile(absoluteSvgFilePath, dir, name, category) {
             category,
             name,
             data,
+            svgData,
           };
 
           vueBuilder.generateVueComp(iconInfo);
