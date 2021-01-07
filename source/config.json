@@ -1,0 +1,18 @@
+{
+  "source": {
+    "Basic": {
+      "name": "基础图标库",
+      "icons": {
+        "Close": {
+          "name": "关闭"
+        },
+        "Exit": {
+          "name": "退出"
+        },
+        "OffScreen": {
+          "name": "离开屏幕"
+        }
+      }
+    }
+  }
+}

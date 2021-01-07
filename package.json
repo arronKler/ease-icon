@@ -4,12 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap && yarn run build:compiler && yarn build",
+    "bootstrap": "lerna bootstrap && yarn run build:compiler && yarn build:icons",
     "build:compiler": "bash setup.sh",
-    "build": "node build/build-icons.js && bash build.sh",
+    "build:icons": "node build/build-icons.js && bash build.sh",
     "start": "cd demo && yarn serve"
   },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "ora": "^5.2.0",
+    "prettier": "^2.2.1",
+    "xml2js": "^0.4.23"
   }
 }

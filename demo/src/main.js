@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import * as Icons from '@ease-icon/vue';
+import * as Icons from '@ease-icon/vue-basic';
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
