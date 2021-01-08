@@ -31,3 +31,12 @@ exports.copyWithInject = function (src, dest, injectors, checkDest) {
   });
   fs.writeFileSync(dest, content);
 };
+
+/* 不存在的目录就新创建一个 */
+exports.createFolder = function (basePath, folder) {
+  const folderPath = path.join(basePath, folder);
+
+  if (!fs.existsSync(folderPath)) {
+    fs.mkdirSync(folderPath);
+  }
+};

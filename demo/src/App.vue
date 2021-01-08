@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       size: '40',
-      colors: ['#333', '', '', ''],
+      colors: ['#333', '#333', '', ''],
     };
   },
   methods: {
@@ -45,20 +45,28 @@ export default {
 </script>
 
 <style lang="less">
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+  width: 100vw;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
+  overflow: hidden;
 }
 
 .left-panel {
@@ -66,11 +74,11 @@ body {
   border-right: 1px solid #aaa;
   height: 100%;
   flex-shrink: 0;
+  flex-basis: 200px;
 }
 
 .main-area {
   flex: 1;
-  box-sizing: border-box;
   overflow-y: scroll;
   height: 100%;
   padding: 20px;
@@ -81,8 +89,9 @@ body {
 
 .operation {
   width: 300px;
+  flex-basis: 300px;
   border-left: 1px solid #aaa;
-  height: 100%;
   padding: 20px;
+  flex-shrink: 0;
 }
 </style>

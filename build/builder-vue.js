@@ -19,7 +19,7 @@ export default {
     },
     colors: {
       type: Array,
-      default: () => ['#333'],
+      default: () => ['#333', '#333'],
     },
     mode: {
       type: String,
@@ -27,6 +27,15 @@ export default {
     },
   },
   name: '$name$',
+  data () {
+    return {
+      defaultColors: [
+        '$MainStrokeColor$', 
+        '$MainFillColor$', 
+        '$SecondStrokeColor$', 
+        '$SecondFillColor$']
+    }
+  },
   render() {
     return ($render$)
   },
@@ -82,14 +91,14 @@ exports.generateVueEntry = function (iconInfos, category) {
 
     exportAllStatement += `${name},\n`;
 
-    registerComponentStatement += `Vue.component('I' + ${name}.name, Vue.extend(${name}))\n`;
+    registerComponentStatement += `Vue.component((options.prefix ||'I') + ${name}.name, ${name})\n`;
   }
 
   exportAllStatement += '}\n';
 
   const exportDefaultStatement = `\n
   export default {
-    install(Vue) {
+    install(Vue, options = {}) {
       ${registerComponentStatement}
     }
   }
@@ -156,4 +165,10 @@ exports.copyEssentialFiles = function (category) {
   } catch (e) {
     console.error(e);
   }
+};
+
+exports.prepareFolder = function (category) {
+  helper.createFolder(VUE_PACKAGE_PATH, category);
+
+  helper.createFolder(path.join(VUE_PACKAGE_PATH, category), 'icons');
 };

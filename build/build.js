@@ -28,6 +28,9 @@ function resolveCategory(categoryPath, category) {
   const svgFiles = fs.readdirSync(categoryPath);
 
   const promises = [];
+
+  if (svgFiles.length > 0) vueBuilder.prepareFolder(category);
+
   svgFiles.forEach((svgFilename) => {
     const absoluteSvgFilePath = path.join(categoryPath, svgFilename);
 
@@ -54,7 +57,9 @@ function resolveCategory(categoryPath, category) {
         vueBuilder.buildVuePackage(category);
       }
     })
-    .catch(function () {});
+    .catch(function (e) {
+      console.error(e);
+    });
 }
 
 function resolveSvgFile(absoluteSvgFilePath, dir, name, category) {

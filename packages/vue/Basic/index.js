@@ -4,19 +4,33 @@ import Close from "./icons/Close"
 import Dislike from "./icons/Dislike"
 import Exit from "./icons/Exit"
 import InboxIn from "./icons/InboxIn"
+import More from "./icons/More"
 import OffScreen from "./icons/OffScreen"
 import PhoneOutgoing from "./icons/PhoneOutgoing"
 import Security from "./icons/Security"
-export { Close, Dislike, Exit, InboxIn, OffScreen, PhoneOutgoing, Security }
+import Wechat from "./icons/Wechat"
+export {
+  Close,
+  Dislike,
+  Exit,
+  InboxIn,
+  More,
+  OffScreen,
+  PhoneOutgoing,
+  Security,
+  Wechat,
+}
 
 export default {
-  install(Vue) {
-    Vue.component("I" + Close.name, Vue.extend(Close))
-    Vue.component("I" + Dislike.name, Vue.extend(Dislike))
-    Vue.component("I" + Exit.name, Vue.extend(Exit))
-    Vue.component("I" + InboxIn.name, Vue.extend(InboxIn))
-    Vue.component("I" + OffScreen.name, Vue.extend(OffScreen))
-    Vue.component("I" + PhoneOutgoing.name, Vue.extend(PhoneOutgoing))
-    Vue.component("I" + Security.name, Vue.extend(Security))
+  install(Vue, options = {}) {
+    Vue.component((options.prefix || "I") + Close.name, Close)
+    Vue.component((options.prefix || "I") + Dislike.name, Dislike)
+    Vue.component((options.prefix || "I") + Exit.name, Exit)
+    Vue.component((options.prefix || "I") + InboxIn.name, InboxIn)
+    Vue.component((options.prefix || "I") + More.name, More)
+    Vue.component((options.prefix || "I") + OffScreen.name, OffScreen)
+    Vue.component((options.prefix || "I") + PhoneOutgoing.name, PhoneOutgoing)
+    Vue.component((options.prefix || "I") + Security.name, Security)
+    Vue.component((options.prefix || "I") + Wechat.name, Wechat)
   },
 }

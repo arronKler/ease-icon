@@ -8,7 +8,7 @@ export default {
     },
     colors: {
       type: Array,
-      default: () => ["#333"],
+      default: () => ["#333", "#333"],
     },
     mode: {
       type: String,
@@ -16,6 +16,16 @@ export default {
     },
   },
   name: "Exit",
+  data() {
+    return {
+      defaultColors: [
+        "$MainStrokeColor$",
+        "$MainFillColor$",
+        "$SecondStrokeColor$",
+        "$SecondFillColor$",
+      ],
+    }
+  },
   render() {
     return (
       <svg

@@ -12,6 +12,7 @@ exports.injectPackageJSON = function () {};
 const Placeholder = {
   Size: '{this.size}',
   Color1: '{this.colors[0]}',
+  Color2: '{this.colors[1]}',
 };
 
 exports.resolveSvgData = function (source) {
@@ -19,13 +20,27 @@ exports.resolveSvgData = function (source) {
     .parseStringPromise(source)
     .then((xmlObj) => {
       if (xmlObj.svg) {
-        const { $, rect, path: svgPath } = xmlObj.svg;
+        const { $, rect, path: svgPath, polyline, polygon } = xmlObj.svg;
         $.width = Placeholder.Size;
         $.height = Placeholder.Size;
 
         if (svgPath) {
           svgPath.forEach((svgPathItem) => {
             svgPathItem.$.stroke = Placeholder.Color1;
+            if (svgPathItem.$.fill) svgPathItem.$.fill = Placeholder.Color2;
+          });
+        }
+
+        if (polyline) {
+          polyline.forEach((polylineItem) => {
+            polylineItem.$.stroke = Placeholder.Color1;
+          });
+        }
+
+        if (polygon) {
+          polygon.forEach((polygonItem) => {
+            polygonItem.$.stroke = Placeholder.Color1;
+            polygonItem.$.fill = Placeholder.Color1;
           });
         }
       }
