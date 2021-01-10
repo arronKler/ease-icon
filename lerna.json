@@ -1,7 +1,7 @@
 {
   "npmClient": "yarn",
   "packages": [
-    "packages/vue/*"
+    "packages/*"
   ],
   "version": "independent"
 }

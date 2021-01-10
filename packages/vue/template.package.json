@@ -1,6 +1,0 @@
-{
-  "name": "@ease-icon/vue-{name}",
-  "version": "1.0.0",
-  "main": "./dist/index.umd.min.js",
-  "license": "MIT"
-}

@@ -1,8 +1,9 @@
 {
   "name": "ease-icon",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
+  "repository": "git@github.com:arronKler/ease-icon.git",
+  "author": "arronKler <panzer9@126.com>",
   "scripts": {
     "build": "node build/build",
     "start": "cd demo && yarn serve"
@@ -12,5 +13,6 @@
     "ora": "^5.2.0",
     "prettier": "^2.2.1",
     "xml2js": "^0.4.23"
-  }
+  },
+  "dependencies": {}
 }
