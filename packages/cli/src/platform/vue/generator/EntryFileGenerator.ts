@@ -15,8 +15,6 @@ export default function (
 
   let registerComponentStatement = '';
 
-  console.log(records.keys());
-
   for (let name of records.keys()) {
     importStatement += `import ${name} from "./icons/${name}";\n`;
 

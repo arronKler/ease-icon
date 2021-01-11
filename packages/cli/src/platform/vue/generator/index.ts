@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import ora from 'ora'
 
 import ComponentGenerator from './ComponentGenerator';
 import EssentialFileGenerator from './EssentialFileGenerator';
@@ -22,6 +23,7 @@ function getFiles(sourcePackagePath: string): string[] {
 }
 
 function generatePackage(from: string, to: string, category: string) {
+  const spinner = ora('`Generating package ${category} ...`').start()
   // used to record some key infos during compilation
   // which can be used for other features
   const iconRecord: Map<string, IconRecord> = new Map();
@@ -40,43 +42,41 @@ function generatePackage(from: string, to: string, category: string) {
   // generate each component
   const promises: Array<Promise<any>> = [];
   for (let filename of files) {
-    const rawFilename = filename.slice(0, -4);
+    const name = filename.slice(0, -4);
     const svgFilePath = path.join(sourcePackagePath, filename);
-
-    console.log('frr', rawFilename);
 
     const promise = xml
       .resolveSvgFile(svgFilePath)
       .then((svgFileData: string | void) => {
         ComponentGenerator(
           outputPackageIconsPath,
-          rawFilename,
+          name,
           svgFileData || '',
         );
 
-        iconRecord.set(rawFilename, {
-          name: rawFilename,
+        iconRecord.set(name, {
+          name: name,
         });
       });
 
     promises.push(promise);
   }
 
-  Promise.all(promises).then(() => {
-    console.log(iconRecord);
-
+  return Promise.all(promises).then(() => {
     EntryFileGenerator(outputPackagePath, iconRecord);
     EssentialFileGenerator(outputPackagePath, category);
+  }).then(() => {
+    spinner.succeed(`Generate package ${category} succeed!`)
   });
 }
 
-export function generator(
+export async function generator(
   from: string,
   to: string,
   categories: Array<string>,
-  opts: GenerateOptions,
+  opts?: GenerateOptions,
 ) {
   for (let category of categories) {
-    generatePackage(from, to, category);
+    await generatePackage(from, to, category);
   }
 }

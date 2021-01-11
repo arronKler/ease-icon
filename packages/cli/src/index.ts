@@ -42,32 +42,40 @@ program
     'vue',
   )
   .option('-s, --scope <scope>', 'package scope (only valid in the first time)')
-  .option('-b, --with-build', 'build file after generate lib')
-  .option('-p, --with-publish', 'publish after generate and build')
-  .action(function (category, cmdObj) {
-    const { type, scope, withBuild = false, withPublish = false } = cmdObj;
+  .option('-b, --with-build', 'build file after generate lib', false)
+  .option('-p, --with-publish', 'publish after generate and build', false)
+  .action(async function (category, cmdObj) {
+    const { type, scope, withBuild, withPublish } = cmdObj;
 
     const generateTypes = type.split(',');
-    generateLib.generate(generateTypes, category ? [category] : [], scope);
+
+    await generateLib.generate(generateTypes, category ? [category] : [], scope);
 
     if (withBuild) {
-      // TODO: auto build after generate
+      buildLib.build(generateTypes, category ? [category] : [])
     }
   });
 
 program
-  .command('build [packages]')
+  .command('build [category]')
   .description('build icon lib[s]')
   .option(
     '-t, --type [type]',
     'generate type, you can pass multiple types like this: vue,react,iconfont',
     'vue',
   )
-  .action(function (packages, cmdObj) {
-    // buildLib.build();
-    const { type, withPublish = false } = cmdObj;
+  .option('-s, --scope <scope>', 'package scope (only valid in the first time)')
+  .option('-b, --only-build', 'just generate package without build', false)
+  .action(async function (category, cmdObj) {
+    const { type, scope, onlyBuild } = cmdObj;
+
     const buildTypes = type.split(',');
-    buildLib.build(buildTypes, packages ? [packages] : []);
+
+    if (!onlyBuild) {
+      await generateLib.generate(buildTypes, category ? [category] : [], scope);
+    }
+
+    buildLib.build(buildTypes, category ? [category] : []);
   });
 
 program.command('publish').action(function () {});

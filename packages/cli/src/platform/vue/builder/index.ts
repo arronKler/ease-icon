@@ -1,13 +1,13 @@
 import path from 'path';
 import { rollup, Plugin } from 'rollup';
 import { babel } from '@rollup/plugin-babel';
-// import progress from 'rollup-plugin-progress';
+import progress from 'rollup-plugin-progress';
 import { terser } from 'rollup-plugin-terser';
 
 async function buildPackage(packagePath: string, pkgName: string) {
   let inputOptions = {
     plugins: [
-      // progress(),
+      progress(),
       terser(),
       babel({
         babelrc: false,
