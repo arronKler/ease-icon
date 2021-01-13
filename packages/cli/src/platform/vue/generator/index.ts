@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import ora from 'ora'
+import ora from 'ora';
 
 import ComponentGenerator from './ComponentGenerator';
 import EssentialFileGenerator from './EssentialFileGenerator';
@@ -23,7 +23,8 @@ function getFiles(sourcePackagePath: string): string[] {
 }
 
 function generatePackage(from: string, to: string, category: string) {
-  const spinner = ora('`Generating package ${category} ...`').start()
+  const spinner = ora('`Generating package ${category} ...`').start();
+
   // used to record some key infos during compilation
   // which can be used for other features
   const iconRecord: Map<string, IconRecord> = new Map();
@@ -48,11 +49,7 @@ function generatePackage(from: string, to: string, category: string) {
     const promise = xml
       .resolveSvgFile(svgFilePath)
       .then((svgFileData: string | void) => {
-        ComponentGenerator(
-          outputPackageIconsPath,
-          name,
-          svgFileData || '',
-        );
+        ComponentGenerator(outputPackageIconsPath, name, svgFileData || '');
 
         iconRecord.set(name, {
           name: name,
@@ -62,12 +59,14 @@ function generatePackage(from: string, to: string, category: string) {
     promises.push(promise);
   }
 
-  return Promise.all(promises).then(() => {
-    EntryFileGenerator(outputPackagePath, iconRecord);
-    EssentialFileGenerator(outputPackagePath, category);
-  }).then(() => {
-    spinner.succeed(`Generate package ${category} succeed!`)
-  });
+  return Promise.all(promises)
+    .then(() => {
+      EntryFileGenerator(outputPackagePath, iconRecord);
+      EssentialFileGenerator(outputPackagePath, category);
+    })
+    .then(() => {
+      spinner.succeed(`Generate package ${category} succeed!`);
+    });
 }
 
 export async function generator(

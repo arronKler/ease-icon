@@ -2,9 +2,9 @@ import path from 'path';
 import fs from 'fs';
 import fontCarrier from 'font-carrier';
 import svgtofont from 'svgtofont';
-import { createFolder } from '../../helper';
 import svgo from 'svgo';
-import { createBabelOutputPluginFactory } from '@rollup/plugin-babel';
+
+import { done } from '../../logger';
 
 const svgTool = new svgo({
   plugins: [
@@ -154,7 +154,7 @@ export async function generator(
     font.output({ path: path.resolve(to, category, 'fonts/iconfont') });
     */
 
-    svgtofont({
+    await svgtofont({
       src: currentResolvingDir,
       dist: path.resolve(to, category),
       fontName: 'iconfont',
@@ -165,12 +165,11 @@ export async function generator(
         title: category,
         logo: '',
         version: '1.0.0',
+        links: [],
       },
     });
 
-    console.log(
-      'Build iconfont ' + category + ' succeed！',
-      path.resolve(to, category, 'fonts', 'iconfont'),
-    );
+    console.log();
+    done('Build iconfont "' + category + '" succeed！');
   }
 }

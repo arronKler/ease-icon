@@ -1,6 +1,5 @@
 import xml2js from 'xml2js';
 import { readFilePromise } from './helper';
-import fs from 'fs';
 
 const xmlParser = new xml2js.Parser();
 const xmlBuilder = new xml2js.Builder({
@@ -26,12 +25,14 @@ export const resolveSvgFile = function (filePath: string) {
         $.width = Placeholder.Size;
         $.height = Placeholder.Size;
 
+        // TODO: add more feature here
         if (svgPath) {
           svgPath.forEach((svgPathItem: any) => {
             svgPathItem.$.stroke = Placeholder.Color1;
             if (svgPathItem.$.fill) svgPathItem.$.fill = Placeholder.Color2;
           });
         }
+        /*
 
         if (polyline) {
           polyline.forEach((polylineItem: any) => {
@@ -44,7 +45,7 @@ export const resolveSvgFile = function (filePath: string) {
             polygonItem.$.stroke = Placeholder.Color1;
             polygonItem.$.fill = Placeholder.Color1;
           });
-        }
+        } */
       }
 
       let outputXML = xmlBuilder.buildObject(xmlObj);

@@ -23,11 +23,7 @@ export default {
   name: '$name$',
   data () {
     return {
-      defaultColors: [
-        '$MainStrokeColor$', 
-        '$MainFillColor$', 
-        '$SecondStrokeColor$', 
-        '$SecondFillColor$']
+      innerColors: []
     }
   },
   render() {
