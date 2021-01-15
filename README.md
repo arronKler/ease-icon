@@ -5,7 +5,7 @@ Ease-Icon is a icon lib producer, which means you can generate icon libs easily 
 Ease-Icon support three types of icon schema：
 
 1. iconfont
-2. SVG Spirite
+2. SVG Sprites
 3. Vue lib
 
 # Usage
@@ -52,7 +52,7 @@ cp ~/CloseDoor.svg ./source/Common/CloseDoor.svg
 
 (3) Build lib
 
-Build iconfont or svg spirite
+Build iconfont or SVG sprites
 
 ```bash
 eicon build Common -t iconfont
