@@ -1,47 +1,93 @@
 # Introduction
 
-Ease-Icon is a icon lib producer, which means you can generate icon libs easily and deploy those libs in your personal or public npm registry. You just need three steps to use.
+Ease-Icon is a icon lib producer, which means you can generate icon libs easily and deploy those libs in your personal or public npm registry.
 
-1. Create new folder in `source` folder and add your SVG icons to it.
-2. `yarn build` which will build your icons into the packages.
-3. Publish generated icon libs and use it in your project just like using other component libs.
+Ease-Icon support three types of icon schema：
+
+1. iconfont
+2. SVG Spirite
+3. Vue lib
 
 # Usage
 
-## Prerequisite
+## Setup
 
-Before getting started, you should have installed these tools below.
-
-- Yarn : Another package manager like `npm`
-- @vue/cli-service : To run example
-- lerna: Manage monorepo
-
-## Full Use Steps
-
-(1) Get your environment getting warm
+Install command-line tool first.
 
 ```bash
-yarn run bootstrap
+npm install ease-icon-cli -g
 ```
 
-(2) Create folder in source folder and add icons into it
+After installed cli tool, init a new icon project.
+
+```bash
+eicon init demo-icon
+```
+
+After initiation, install dependecies.
+
+```bash
+cd demo-icon && npm install
+```
+
+## Usage
+
+(1) add new folder in source folder.
+
+```bash
+mkdir source/Common
+```
+
+> Notice: we recommand to use word with CamelCase as new folder name.
+
+(2) Copy your svg icons which have exported from tools like Skecth、figma and so on，to the new folder you created.
+
+example:
+
+```bash
+cp ~/CloseDoor.svg ./source/Common/CloseDoor.svg
+```
+
+> Notice: we recommand to use word with CamelCase as svg filename
 
 (3) Build lib
 
+Build iconfont or svg spirite
+
 ```bash
-yarn build
+eicon build Common -t iconfont
 ```
 
-(4) Run demo site to see if it works
+Build vue lib
 
 ```bash
-yarn start
+eicon build Common
+```
+
+If you don't pass the folder name you just created, eicon will build all folders under source folder.
+
+(4) Run a service to check demo
+
+Config your lib in demo/src/source_config.js
+
+```javascript
+export default {
+  Common: { title: 'Common Icons' },
+};
+```
+
+Then serve it:
+
+```bash
+npm run serve
 ```
 
 (5) Publish you lib(s)
 
+> Notice: before publish package, login to the npm registry first with `npm login`
+
 ```bash
-lerna publish
+eicon publish Common
 ```
 
 (6) Install and use it in your project

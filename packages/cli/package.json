@@ -1,5 +1,5 @@
 {
-  "name": "@ease-icon/cli",
+  "name": "ease-icon-cli",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "repository": "git@github.com:arronKler/ease-icon.git",
@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublishOnly": "tsc"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -21,7 +21,6 @@
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "commander": "^6.2.1",
-    "font-carrier": "^0.2.0",
     "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "ora": "^5.2.0",
@@ -39,6 +38,7 @@
     "@types/lodash": "^4.14.167",
     "@types/node": "^14.14.20",
     "@types/prettier": "^2.1.6",
+    "@types/semver": "^7.3.4",
     "@types/xml2js": "^0.4.7"
   }
 }

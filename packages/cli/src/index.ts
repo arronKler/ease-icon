@@ -7,6 +7,7 @@ import projectLib from './lib/project';
 import buildLib from './lib/build';
 import generateLib from './lib/generate';
 import optimizeLib from './lib/optimize';
+import publishLib from './lib/publish';
 import inquirer from 'inquirer';
 
 /*  Setup */
@@ -36,7 +37,9 @@ program
 program
   .command('serve')
   .description('Serve project site for running')
-  .action(() => {});
+  .action(() => {
+    console.log('Not supported now');
+  });
 
 // generate
 program
@@ -130,7 +133,9 @@ program
   });
 
 // publish
-program.command('publish').action(function () {});
+program.command('publish <category>').action(function (category) {
+  publishLib.publish(category);
+});
 
 // deploy
 program

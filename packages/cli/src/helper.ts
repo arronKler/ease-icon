@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { exec } from 'child_process';
 
 export function readFilePromise(filePath: string) {
   return new Promise((resolve, reject) => {
@@ -73,3 +74,12 @@ export const createFolder = function (basePath: string, folder: string) {
     fs.mkdirSync(folderPath);
   }
 };
+
+export function exec_promise(command: string, opt?: any) {
+  return new Promise((resolve, reject) => {
+    exec(command, opt, (err, out) => {
+      if (err) reject(err);
+      else resolve(out);
+    });
+  });
+}
