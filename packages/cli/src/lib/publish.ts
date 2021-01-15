@@ -37,7 +37,8 @@ async function checkVersion(categoryPath: string) {
         },
       ]);
 
-      await exec_promise(`npm version ${anwser.method}`, {
+      const method = anwser.method.splice(' ')[0];
+      await exec_promise(`npm version ${method}`, {
         cwd: categoryPath,
       });
 
