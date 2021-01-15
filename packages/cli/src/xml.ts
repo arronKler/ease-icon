@@ -26,12 +26,12 @@ export const resolveSvgFile = function (filePath: string) {
         $.height = Placeholder.Size;
 
         // TODO: add more feature here
-        if (svgPath) {
+        /* if (svgPath) {
           svgPath.forEach((svgPathItem: any) => {
             svgPathItem.$.stroke = Placeholder.Color1;
             if (svgPathItem.$.fill) svgPathItem.$.fill = Placeholder.Color2;
           });
-        }
+        } */
         /*
 
         if (polyline) {

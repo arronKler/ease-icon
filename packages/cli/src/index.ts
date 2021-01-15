@@ -6,6 +6,7 @@ import { Command } from 'commander';
 import projectLib from './lib/project';
 import buildLib from './lib/build';
 import generateLib from './lib/generate';
+import optimizeLib from './lib/optimize';
 import inquirer from 'inquirer';
 
 /*  Setup */
@@ -111,11 +112,22 @@ program
 
 // clean
 program
-  .command('optimize')
+  .command('optimize [category]')
   .description(
     'Optimize source svg files, this may help you solve some issue when building components!',
   )
-  .action(function () {});
+  .action(async function (category, cmdObj) {
+    try {
+      let buildAll = false;
+      if (category === undefined) {
+        const answer = await inquirer.prompt([]);
+
+        optimizeLib.optimize();
+      }
+    } catch (e) {
+      console.error('Optimize Error:', e);
+    }
+  });
 
 // publish
 program.command('publish').action(function () {});
