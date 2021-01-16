@@ -9,6 +9,7 @@ const VUE_ENTRY_FILENAME = 'index.js';
 export default function (
   outputPackagePath: string,
   records: Map<string, IconRecord>,
+  iconPath = 'icons/',
 ) {
   let importStatement = '';
   let exportAllStatement = 'export {\n';
@@ -16,7 +17,7 @@ export default function (
   let registerComponentStatement = '';
 
   for (let name of records.keys()) {
-    importStatement += `import ${name} from "./icons/${name}";\n`;
+    importStatement += `import ${name} from "./${iconPath}${name}";\n`;
 
     exportAllStatement += `${name},\n`;
 

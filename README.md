@@ -8,15 +8,40 @@ Ease-Icon support three types of icon schema：
 2. SVG Sprites
 3. Vue lib
 
-# Usage
-
-## Setup
+# Install
 
 Install command-line tool first.
 
 ```bash
 npm install ease-icon-cli -g
 ```
+
+# Usage 1: As an icon producer for your project
+
+(1) Create your own source folder to maintain source svg files.And copy svg files in it.
+
+```bash
+mkdir ./source
+
+
+```
+
+(2) Run build command
+
+```bash
+# defualt to build vue lib
+eicon pack ./source ./dist
+
+# you can build iconfong with '--font'
+eicon pack ./source ./dist --font
+
+# watch mode with '-w'
+eicon pack ./souce ./dist -w
+```
+
+# Usage 2: As an icon lib repo
+
+## Setup
 
 After installed cli tool, init a new icon project.
 

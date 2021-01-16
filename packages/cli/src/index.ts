@@ -8,6 +8,7 @@ import buildLib from './lib/build';
 import generateLib from './lib/generate';
 import optimizeLib from './lib/optimize';
 import publishLib from './lib/publish';
+import packLib from './lib/pack';
 import inquirer from 'inquirer';
 
 /*  Setup */
@@ -53,7 +54,7 @@ program
   .option('-s, --scope <scope>', 'package scope (only valid in the first time)')
   .option('-b, --with-build', 'build file after generate lib', false)
   .option('-p, --with-publish', 'publish after generate and build', false)
-  .action(async function (category, cmdObj) {
+  .action(async function (category: any, cmdObj: any) {
     const { type, scope, withBuild, withPublish } = cmdObj;
 
     const generateTypes = type.split(',');
@@ -80,7 +81,7 @@ program
   )
   .option('-s, --scope <scope>', 'package scope (only valid in the first time)')
   .option('-b, --only-build', 'just generate package without build', false)
-  .action(async function (category, cmdObj) {
+  .action(async function (category: any, cmdObj: any) {
     const { type, scope, onlyBuild } = cmdObj;
 
     const buildTypes = type.split(',');
@@ -119,7 +120,7 @@ program
   .description(
     'Optimize source svg files, this may help you solve some issue when building components!',
   )
-  .action(async function (category, cmdObj) {
+  .action(async function (category: any, cmdObj: any) {
     try {
       let buildAll = false;
       if (category === undefined) {
@@ -137,11 +138,16 @@ program.command('publish <category>').action(function (category) {
   publishLib.publish(category);
 });
 
-// deploy
+// pack: single project use
 program
-  .command('deploy')
-  .description('Run all process in single command: generate, build, deploy')
-  .action(function () {});
+  .command('pack <source> <dest>')
+  .description('Single build mode for your project')
+  .option('--font', 'specify build type is iconfont', false)
+  // .option('-t, --type [type]', 'build type', 'vue')
+  .action(function (source, dest, cmdObj) {
+    const { font: isFont } = cmdObj;
+    packLib.pack(source, dest, isFont);
+  });
 
 /* Default action */
 program.action(() => {
