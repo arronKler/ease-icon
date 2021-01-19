@@ -96,7 +96,7 @@ For example in Vue:
 
 ```javascript
 import Vue from 'vue';
-import Icons from '@ease-icon/vue-basic';
+import Icons from '@ease-icon/vue-common';
 
 Vue.use(Icons);
 
