@@ -15,19 +15,24 @@ export default {
       type: Array,
       default: () => [$colors$],
     },
-    mode: {
-      type: String,
-      defualt: 'single',
+    darkColors: {
+      type: Array,
+      default: () => [$colors$]
     },
+    darkMode: Boolean,
   },
   name: '$name$',
   data () {
     return {
-      innerColors: []
+    }
+  },
+  computed: {
+    innerColors() {
+      return this.darkMode ? this.darkColors : this.colors
     }
   },
   render(h) {
-    const colors = this.colors
+    const colors = this.innerColors
     return ($render$)
   },
 };
@@ -45,7 +50,7 @@ export default function (
   let resolvedData = VueTemplate.replace(/\$name\$/gi, filename);
   resolvedData = resolvedData.replace(/\$render\$/, svgData);
   resolvedData = resolvedData.replace(
-    /\$colors\$/,
+    /\$colors\$/g,
     colors.map((color) => `'${color}'`).join(','),
   );
 
