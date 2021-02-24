@@ -1,12 +1,12 @@
 const fs = require('fs');
-const xml2js = require('xml2js');
+const xml2js = require('../packages/cli/node_modules/xml2js');
 
 const xmlParser = new xml2js.Parser();
 const xmlBuilder = new xml2js.Builder({
   headless: true,
 });
 
-const content = fs.readFileSync('./source/Basic/Service.svg', {
+const content = fs.readFileSync('./test_script/MailOpen.svg', {
   encoding: 'utf-8',
 });
 
@@ -15,9 +15,9 @@ let counter = -1;
 
 xmlParser.parseStringPromise(content).then((xmlobj) => {
   const svg = xmlobj.svg;
-  // console.log(svg)
+  console.log(svg);
   resolveSvg(svg);
-  console.log(svg.path);
+  console.log(svg.g[0]);
   console.log('[' + colorMap.map((color) => `'${color}'`).join(',') + ']');
 });
 
@@ -30,10 +30,16 @@ function resolveSvg(svg) {
         break;
       case 'path':
       case 'rect':
+      case 'polyline':
         resolveColors(svg[key]);
         break;
       case 'mask':
         resolveSvg(svg[key]); // recursive
+        break;
+      case 'g':
+        svg[key].forEach((item) => {
+          resolveSvg(item);
+        });
         break;
     }
   });

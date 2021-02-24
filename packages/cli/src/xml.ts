@@ -59,10 +59,16 @@ function resolveSvgObj(svg: any) {
       case 'path':
       case 'rect':
       case 'circle':
+      case 'polyline':
         resolveColors(svg[key]);
         break;
       case 'mask':
         resolveSvgObj(svg[key]); // recursive
+        break;
+      case 'g':
+        svg[key].forEach((item: any) => {
+          resolveSvgObj(item);
+        });
         break;
     }
   });
