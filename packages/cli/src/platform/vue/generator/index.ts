@@ -11,7 +11,7 @@ import { GenerateOptions, IconRecord } from './interface';
 import * as helper from '../../../helper';
 import * as xml from '../../../xml';
 
-function getFiles(sourcePackagePath: string): string[] {
+export function getFiles(sourcePackagePath: string): string[] {
   let files = fs.readdirSync(sourcePackagePath);
 
   // filter
@@ -22,7 +22,7 @@ function getFiles(sourcePackagePath: string): string[] {
   return files;
 }
 
-function generatePackage(from: string, to: string, category: string) {
+export function generatePackage(from: string, to: string, category: string) {
   const spinner = ora('`Generating package ${category} ...`').start();
 
   // used to record some key infos during compilation
