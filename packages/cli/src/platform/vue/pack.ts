@@ -12,10 +12,6 @@ import { IconRecord } from './generator/interface';
 import ora from 'ora';
 import path from 'path';
 
-export function generate(from: string, to: string) {}
-
-function build(from: string, to: string) {}
-
 export default async function pack(from: string, to: string) {
   const spinner = ora('Start building vue icons').start();
   // used to record some key infos during compilation
@@ -34,15 +30,14 @@ export default async function pack(from: string, to: string) {
     const name = filename.slice(0, -4);
     const svgFilePath = path.join(from, filename);
 
-    const promise = xml
-      .resolveSvgFile(svgFilePath)
-      .then((svgFileData: string | void) => {
-        ComponentGenerator(to, name, svgFileData || '');
+    const promise = xml.resolveSvgFile(svgFilePath).then((svgResult) => {
+      const [svgFileData, colors] = svgResult;
+      ComponentGenerator(to, name, svgFileData || '', colors);
 
-        iconRecord.set(name, {
-          name: name,
-        });
+      iconRecord.set(name, {
+        name: name,
       });
+    });
 
     promises.push(promise);
   }

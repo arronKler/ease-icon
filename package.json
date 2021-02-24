@@ -4,9 +4,7 @@
   "license": "MIT",
   "repository": "git@github.com:arronKler/ease-icon.git",
   "author": "arronKler <panzer9@126.com>",
-  "scripts": {
-    "start": "cd demo && npm run serve"
-  },
+  "scripts": {},
   "devDependencies": {
     "lerna": "^3.22.1"
   }

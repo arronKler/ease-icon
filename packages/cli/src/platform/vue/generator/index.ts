@@ -10,6 +10,7 @@ import { GenerateOptions, IconRecord } from './interface';
 
 import * as helper from '../../../helper';
 import * as xml from '../../../xml';
+import { buildPackage } from '../builder/packBuilder';
 
 export function getFiles(sourcePackagePath: string): string[] {
   let files = fs.readdirSync(sourcePackagePath);
@@ -23,7 +24,7 @@ export function getFiles(sourcePackagePath: string): string[] {
 }
 
 export function generatePackage(from: string, to: string, category: string) {
-  const spinner = ora('`Generating package ${category} ...`').start();
+  const spinner = ora(`Generating package ${category} ...`).start();
 
   // used to record some key infos during compilation
   // which can be used for other features
@@ -46,23 +47,30 @@ export function generatePackage(from: string, to: string, category: string) {
     const name = filename.slice(0, -4);
     const svgFilePath = path.join(sourcePackagePath, filename);
 
-    const promise = xml
-      .resolveSvgFile(svgFilePath)
-      .then((svgFileData: string | void) => {
-        ComponentGenerator(outputPackageIconsPath, name, svgFileData || '');
+    const promise = xml.resolveSvgFile(svgFilePath).then((svgResult) => {
+      const [svgFileData, colors] = svgResult;
+      ComponentGenerator(
+        outputPackageIconsPath,
+        name,
+        svgFileData || '',
+        colors,
+      );
 
-        iconRecord.set(name, {
-          name: name,
-        });
+      iconRecord.set(name, {
+        name: name,
       });
+    });
 
     promises.push(promise);
   }
 
   return Promise.all(promises)
-    .then(() => {
+    .then(async () => {
       EntryFileGenerator(outputPackagePath, iconRecord);
       EssentialFileGenerator(outputPackagePath, category);
+
+      // transform vue jsx syntax to h() function
+      await buildPackage(outputPackageIconsPath);
     })
     .then(() => {
       spinner.succeed(`Generate package ${category} succeed!`);

@@ -13,7 +13,7 @@ export default {
     },
     colors: {
       type: Array,
-      default: () => ['#333', '#333'],
+      default: () => [$colors$],
     },
     mode: {
       type: String,
@@ -26,7 +26,8 @@ export default {
       innerColors: []
     }
   },
-  render() {
+  render(h) {
+    const colors = this.colors
     return ($render$)
   },
 };
@@ -37,11 +38,16 @@ export default function (
   outputPath: string,
   filename: string,
   svgData: string,
+  colors: string[],
 ) {
   const outputFilePath = path.join(outputPath, filename + '.js');
 
   let resolvedData = VueTemplate.replace(/\$name\$/gi, filename);
   resolvedData = resolvedData.replace(/\$render\$/, svgData);
+  resolvedData = resolvedData.replace(
+    /\$colors\$/,
+    colors.map((color) => `'${color}'`).join(','),
+  );
 
   resolvedData = prettier.format(resolvedData, {
     semi: false,
